@@ -147,4 +147,86 @@ function gameObject() {
     return teams;
 }
 
-gameObject()
+const gameObj = gameObject();
+console.log(gameObj)
+
+//takes in players name, returns their score
+//need to check home and away to match name, then return points
+//maybe helper function
+
+function numPointsScored(name) {
+    if (gameObj.home.players[name] !== undefined) {
+        return gameObj.home.players[name].points
+    } else if (gameObj.away.players[name] !== undefined) {
+        return gameObj.away.players[name].points
+    } else {
+        return "Player was not in the game."
+    }
+}
+
+console.log(numPointsScored("Jeff Adrien"));
+
+function shoeSize(name) {
+    if (gameObj.home.players[name] !== undefined) {
+        return gameObj.home.players[name].shoe;
+    } else if (gameObj.away.players[name] !== undefined) {
+        return gameObj.away.players[name].shoe;
+    } else {
+        return "Player was not in the game.";
+    }
+}
+
+console.log(shoeSize("Jason Terry"));
+
+function teamColors(team) {
+    if (gameObj.home.teamName === team) {
+        return gameObj.home.colors;
+    } else if (gameObj.away.teamName === team) {
+        return gameObj.away.colors;
+    } else {
+        return "Team did not play in the game.";
+    }
+}
+
+console.log(teamColors('Brooklyn Nets'));
+
+function teamNames(object) {
+    return [object.home.teamName, object.away.teamName]
+}
+
+console.log(teamNames(gameObj));
+
+// check if team name is away or home, then iterate through the object to get playerNums
+// use teamNames to check if team is away or home
+//iterate through the teamNames array
+
+function homeOrAwayCheck(nameOfTeam) {
+    if (gameObj.home.teamName === nameOfTeam) {
+        return 'home';
+    } else if (gameObj.away.teamName === nameOfTeam) {
+        return 'away'
+    }
+}
+
+function playerNumbers(nameOfTeam) {
+    const teams = teamNames(gameObj);
+    const teamLocation = homeOrAwayCheck(nameOfTeam);
+    console.log(teamLocation)
+    //     if (currentTeam === nameOfTeam) {
+    //         let players = gameObj.currentTeam.players
+    //         console.log('players', players)
+    //         for (let key in players) {
+    //             let playerNum = players[key].number;
+    //             playerNums.push(playerNum)
+    //         }
+    //     }
+    // }
+
+    // return playerNums;
+}
+
+console.log(playerNumbers('Brooklyn Nets'))
+
+// function playerStats()
+
+// console.log(playerStats())
