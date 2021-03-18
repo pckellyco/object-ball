@@ -118,7 +118,7 @@ const brendanHaywoodStats =
     slamDunks: 12 
     };
 
-function gameObject() {
+const gameObject = () => {
     const teams = {
         home: {
             teamName: 'Brooklyn Nets',
@@ -148,13 +148,13 @@ function gameObject() {
 }
 
 const gameObj = gameObject();
-// console.log(gameObj) --- check
+// console.log(gameObj) ---- check
 
 //takes in players name, returns their score
 //need to check home and away to match name, then return points
 //maybe helper function
 
-function numPointsScored(name) {
+const numPointsScored = (name) => {
     if (gameObj.home.players[name] !== undefined) {
         return gameObj.home.players[name].points
     } else if (gameObj.away.players[name] !== undefined) {
@@ -164,7 +164,7 @@ function numPointsScored(name) {
     }
 }
 
-// console.log(numPointsScored("Jeff Adrien")); --
+// console.log(numPointsScored("Jeff Adrien"));
 
 function shoeSize(name) {
     if (gameObj.home.players[name] !== undefined) {
