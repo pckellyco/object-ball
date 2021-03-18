@@ -148,7 +148,7 @@ function gameObject() {
 }
 
 const gameObj = gameObject();
-console.log(gameObj)
+// console.log(gameObj) --- check
 
 //takes in players name, returns their score
 //need to check home and away to match name, then return points
@@ -164,7 +164,7 @@ function numPointsScored(name) {
     }
 }
 
-console.log(numPointsScored("Jeff Adrien"));
+// console.log(numPointsScored("Jeff Adrien")); --
 
 function shoeSize(name) {
     if (gameObj.home.players[name] !== undefined) {
@@ -176,7 +176,7 @@ function shoeSize(name) {
     }
 }
 
-console.log(shoeSize("Jason Terry"));
+// console.log(shoeSize("Jason Terry")); --- check
 
 function teamColors(team) {
     if (gameObj.home.teamName === team) {
@@ -188,19 +188,18 @@ function teamColors(team) {
     }
 }
 
-console.log(teamColors('Brooklyn Nets'));
+// console.log(teamColors('Brooklyn Nets')); --- check
 
 function teamNames(object) {
     return [object.home.teamName, object.away.teamName]
 }
 
-console.log(teamNames(gameObj));
+// console.log(teamNames(gameObj)); --- check
 
 // check if team name is away or home, then iterate through the object to get playerNums
 // use teamNames to check if team is away or home
-//iterate through the teamNames array
 
-function homeOrAwayCheck(nameOfTeam) {
+function homeOrAwayCheck(nameOfTeam) {  //created helper  function to check if team is home or away
     if (gameObj.home.teamName === nameOfTeam) {
         return 'home';
     } else if (gameObj.away.teamName === nameOfTeam) {
@@ -209,24 +208,33 @@ function homeOrAwayCheck(nameOfTeam) {
 }
 
 function playerNumbers(nameOfTeam) {
-    const teams = teamNames(gameObj);
+    const playersNumbers = []
     const teamLocation = homeOrAwayCheck(nameOfTeam);
-    console.log(teamLocation)
-    //     if (currentTeam === nameOfTeam) {
-    //         let players = gameObj.currentTeam.players
-    //         console.log('players', players)
-    //         for (let key in players) {
-    //             let playerNum = players[key].number;
-    //             playerNums.push(playerNum)
-    //         }
-    //     }
-    // }
+    const playersObj = gameObj[teamLocation].players;
+    for (let key in playersObj) {
+        let player = playersObj[key]
+        playersNumbers.push(player.number)
+    }
 
-    // return playerNums;
+    return playersNumbers;
 }
 
-console.log(playerNumbers('Brooklyn Nets'))
+// console.log(playerNumbers('Brooklyn Nets')) --- check
 
-// function playerStats()
 
-// console.log(playerStats())
+function playerTeamLocation(playerName) {
+    if (gameObj.home.players[playerName] !== undefined) {
+        return 'home';
+    } else if (gameObj.away.players[playerName] !== undefined) {
+        return 'away';
+    }
+}
+
+// console.log(playerTeamLocation('Alan Anderson')) --- check
+
+function playerStats(playerName) {
+    const playerTeam = playerTeamLocation(playerName);
+    return gameObj[playerTeam].players[playerName];
+}
+
+// console.log(playerStats('Bismak Biyombo')); ---check
