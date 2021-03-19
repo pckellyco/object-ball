@@ -1,6 +1,6 @@
 //using global variables is bad practice, this takes up more memory is much more efficient
 // create multiple funcitons so thjat they are doing one thing at a time
-// 
+// use new methods like forEach, map, filter, find, reduce
 
 const alanAndersonStats =
     {
