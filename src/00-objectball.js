@@ -1,3 +1,7 @@
+//using global variables is bad practice, this takes up more memory is much more efficient
+// create multiple funcitons so thjat they are doing one thing at a time
+// 
+
 const alanAndersonStats =
     {
     number: 0,
@@ -119,7 +123,7 @@ const brendanHaywoodStats =
     };
 
 const gameObject = () => {
-    const teams = {
+    return {    // can just return instead of creating variable, better to create object as function so it doesn't run the whole thing until its called
         home: {
             teamName: 'Brooklyn Nets',
             colors: ['Black', 'White'],
@@ -143,16 +147,43 @@ const gameObject = () => {
             }
         }
     }
-
-    return teams;
 }
 
 const gameObj = gameObject();
-// console.log(gameObj) ---- check
+
 
 //takes in players name, returns their score
 //need to check home and away to match name, then return points
 //maybe helper function
+
+// Given a player's name, return the number of points scored by that player
+// function numPointsScored(playerInput) {
+//     const game = gameObject()
+//     debugger
+//     for (let gameKey in game) { // iterate through game keys (home, away)
+//         let teamObj = game[gameKey]
+//         debugger
+//         for (let teamKey in teamObj) { // iterate through team keys (teamName, colors, players)
+//             let playerObj = teamObj.players
+//             debugger
+//             for (let playerKey in playerObj) { // iterate through players
+//                 debugger
+//                 if (playerKey === playerInput) { // check to see if player matches function argument
+//                     return playerObj[playerKey].points // return the player's points
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// debugger
+
+const players = () => {
+    const homePlayers = gameObj.home.players;
+    const awaysPlayers = gameObj.
+    Object.assign({}, gameObj.home.players, gameObj.away.players)
+}
+console.log('players', players())
 
 const numPointsScored = (name) => {
     if (gameObj.home.players[name] !== undefined) {
@@ -211,8 +242,8 @@ function playerNumbers(nameOfTeam) {
     const playersNumbers = []
     const teamLocation = homeOrAwayCheck(nameOfTeam);
     const playersObj = gameObj[teamLocation].players;
-    for (let key in playersObj) {
-        let player = playersObj[key]
+    for (let playerNameKey in playersObj) {
+        let player = playersObj[playerNameKey]
         playersNumbers.push(player.number)
     }
 
