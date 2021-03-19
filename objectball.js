@@ -238,3 +238,94 @@ function playerStats(playerName) {
 }
 
 // console.log(playerStats('Bismak Biyombo')); ---check
+
+// use numPointsScored which returns points scored by a player
+// create variables to store points
+
+
+const homePlayersObj = gameObj.home.players // returns object, players names are the keys
+const awayPlayersObj = gameObj.away.players
+
+const mostPointsScored = () => {
+    let bestPlayer = '';
+    for (let homePlayer in homePlayersObj) {
+        const currentHomePlayerPoints = numPointsScored(homePlayer)
+        if (currentHomePlayerPoints > numPointsScored(bestPlayer) || bestPlayer === '') {
+            bestPlayer = homePlayer;
+            bestPlayerLocation = 'home'
+        }
+    }
+    for (let awayPlayer in awayPlayersObj) {
+        const currentAwayPlayerPoints = numPointsScored(awayPlayer)
+        if (currentAwayPlayerPoints > numPointsScored(bestPlayer) || bestPlayer === '') {
+            bestPlayer = awayPlayer;
+            bestPlayerLocation = 'away'
+        }
+    }
+
+    return numPointsScored(bestPlayer);
+}
+
+console.log(mostPointsScored())
+
+const winningTeam= () => {
+    let homePoints = 0;
+    let awayPoints = 0;
+    for (let homePlayer in homePlayersObj) {
+        const homePlayerPoints = numPointsScored(homePlayer)
+        homePoints += homePlayerPoints
+    }
+    for (let awayPlayer in awayPlayersObj) {
+        const awayPlayerPoints = numPointsScored(awayPlayer)
+        awayPoints += awayPlayerPoints
+    }
+    if (homePoints > awayPoints) {
+        return gameObj.home.teamName;
+    } else {
+        return gameObj.away.teamName;
+    }
+}
+
+console.log(winningTeam())
+
+
+const playerWithLongestName = () => {
+    let longestName = '';
+    for (let homePlayer in homePlayersObj) {
+        if (homePlayer.length > longestName.length) {
+            longestName = homePlayer;
+        }
+    }
+    for (let awayPlayer in awayPlayersObj) {
+        if (awayPlayer.length > longestName.length) {
+            longestName = awayPlayer
+        }
+    }
+
+    return longestName;
+}
+
+console.log(playerWithLongestName())
+
+
+// 1. Write a function that returns true if the player with the longest name had
+//    the most steals. Call the function `doesLongNameStealATon`.
+// create a helper function to determine person who steals the most, then compare it to longestName steals
+const doesLongNameStealATon = () => {
+    const longestNameSteals = playerStats(playerWithLongestName()).steals
+    for (let homePlayer in homePlayersObj) {
+        if (playerStats(homePlayer).steals > longestNameSteals) {
+            return false;
+        }
+    }
+    for (let awayPlayer in awayPlayersObj) {
+        if (playerStats(awayPlayer).steals > longestNameSteals) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+console.log(doesLongNameStealATon())
+
