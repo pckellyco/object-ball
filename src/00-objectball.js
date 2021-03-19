@@ -123,10 +123,25 @@ const gameObject = () => {
     }
 }
 
+// create helper functions to identify home team players & away team players
+// then create another function that combines those objects using Object.assign
 
+const homePlayers = () => {
+    return gameObject().home.players
+}
+console.log(homePlayers())
 
+const awayPlayers = () => {
+    return gameObject().away.players
+}
 
+console.log(awayPlayers())
 
+const allPlayers = () => {
+    return Object.assign({}, homePlayers(), awayPlayers())
+}
+
+console.log(allPlayers())
 
 // * Build a function, `shoeSize`, that takes in an argument of a player's name and returns the shoe size for that player.
 //   * Think about how you will find the shoe size of the correct player. How can
