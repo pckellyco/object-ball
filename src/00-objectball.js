@@ -129,30 +129,67 @@ const gameObject = () => {
 const homePlayers = () => {
     return gameObject().home.players
 }
-console.log(homePlayers())
 
 const awayPlayers = () => {
     return gameObject().away.players
 }
 
-console.log(awayPlayers())
-
 const allPlayers = () => {
     return Object.assign({}, homePlayers(), awayPlayers())
 }
-
-console.log(allPlayers())
 
 // * Build a function, `shoeSize`, that takes in an argument of a player's name and returns the shoe size for that player.
 //   * Think about how you will find the shoe size of the correct player. How can
 //     you check and see if a player's name matches the name that has been passed
 //     into the function as an argument?
+
+const shoeSize = (playerName) => {
+    return allPlayers()[playerName].shoe
+}
+
 // * Build a function, `teamColors`, that takes in an argument of the team name
 //   and returns an array of that teams colors.
+
+const teamColors = (teamName) => {
+    if (gameObject().home.teamName === teamName) {
+        return gameObject().home.colors
+    } else {
+        return gameObject().away.colors
+    }
+}
+
 // * Build a function, `teamNames`, that operates on the game object to return an
 //   array of the team names.
+const teamNames = () => {
+    return [gameObject().home.teamName, gameObject().away.teamName]
+}
+
 // * Build a function, `playerNumbers`, that takes in an argument of a team name
 //   and returns an array of the jersey number's for that team.
+
+const playerNumber = (player) => {
+    return player[number]
+}
+
+const teamObject = (teamName) => {
+    if (teamNames()[0] === teamName) {
+        return gameObject().home
+    } else {
+        return gameObject().away
+    }
+}
+
+const playerNumbers = (teamName) => {
+    let playerNumbers = []
+    const players = teamObject(teamName).players
+    for (let player in players) {
+        let playerNumber = players[player].number
+        playerNumbers.push(playerNumber)
+    }
+
+    return playerNumbers
+}
+
 // * Build a function, `playerStats`, that takes in an argument of a player's name
 //   and returns a object of that player's stats.
 //   * Check out the following example of the expected return value of the `playerStats` function:
@@ -170,6 +207,9 @@ console.log(allPlayers())
 //       slamDunks: 1
 //     }
 //     ```
+const playerStats = (player) => {
+    return allPlayers()[player]
+}
 
 // * Build a function, `bigShoeRebounds`, that will return the number of rebounds
 //   associated with the player that has the largest shoe size. Break this one
@@ -179,16 +219,55 @@ console.log(allPlayers())
 //   * Remember to think about return values here. Use `debugger` to drop into
 //     your function and understand what it is returning and why.
 
+const playerShoe = (player) => {
+    return playerStats(player).shoe
+}
+
+const playerRebounds = (player) => {
+    return playerStats(player).rebounds
+}
+
+const bigShoeRebounds = () => {
+    const players = allPlayers()
+    let largestShoe = 0
+    let largestShoePlayer = ''
+    for (let player in players) {
+        if (playerShoe(player) > largestShoe || largestShoe === 0) {
+            largestShoe = playerShoe(player)
+            largestShoePlayer = player
+        }
+    }
+
+    return playerRebounds(largestShoePlayer)
+}
 
 // **Bonus Questions:**
 
 // Define functions to return the answer to the following questions:
 
 // 1. Which player has the most points? Call the function `mostPointsScored`.
+
+const mostPointsScored = () => {
+    const players = allPlayers()
+    let mostPoints = 0
+    let highestScoringPlayer = ''
+    for (let player in players) {
+        if (playerStats(player).points > mostPoints || mostPoints === 0) {
+            highestScoringPlayer = player
+            mostPoints = playerStats(player).points
+        }
+    }
+
+    return highestScoringPlayer;
+}
+
+console.log(mostPointsScored())
+
 // 2. Which team has the most points? Call the function `winningTeam`.
+
 // 3. Which player has the longest name? Call the function `playerWithLongestName`.
 
 // **Super Bonus:**
 
 // 1. Write a function that returns true if the player with the longest name had
-//    the most steals. Call the function `doesLongNameStealATon`.
+// the most steals. Call the function `doesLongNameStealATon`
